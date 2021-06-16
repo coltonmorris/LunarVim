@@ -1,3 +1,6 @@
+-- load our settings that is in vimscript
+vim.cmd('source ~/.config/nvim/settings.vim')
+
 --[[
 O is the global options object
 
