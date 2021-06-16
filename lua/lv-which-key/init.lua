@@ -82,6 +82,7 @@ local mappings = {
     ["f"] = "Find File",
     ["h"] = "No Highlight",
     ["p"] = "Projects",
+
     d = {
         name = "+Diagnostics",
         t = {"<cmd>TroubleToggle<cr>", "trouble"},
@@ -91,6 +92,7 @@ local mappings = {
         l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
         r = {"<cmd>TroubleToggle lsp_references<cr>", "references"},
     },
+
     D = {
         name = "+Debug",
         b = {"<cmd>DebugToggleBreakpoint<cr>", "Toggle Breakpoint"},
@@ -100,6 +102,7 @@ local mappings = {
         r = {"<cmd>DebugToggleRepl<cr>", "Toggle Repl"},
         s = {"<cmd>DebugStart<cr>", "Start"}
     },
+
     g = {
         name = "+Git",
         j = {"<cmd>NextHunk<cr>", "Next Hunk"},
@@ -117,6 +120,7 @@ local mappings = {
         C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
         a = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
     },
+
     l = {
         name = "+LSP",
         a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
@@ -133,8 +137,11 @@ local mappings = {
         t = {"<cmd>LspTypeDefinition<cr>", "Type Definition"},
         x = {"<cmd>cclose<cr>", "Close Quickfix"},
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
-        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"}
+        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
+        n = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic"},
+        N = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Diagnostic"},
     },
+
     s = {
         name = "+Search",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
@@ -156,7 +163,7 @@ local mappings = {
         s = {"<cmd>TZBottom<cr>", "toggle status line"},
         t = {"<cmd>TZTop<cr>", "toggle tab bar"},
         z = {"<cmd>TZAtaraxis<cr>", "toggle zen"},
-    }
+    },
 }
 
 local wk = require("which-key")

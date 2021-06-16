@@ -100,10 +100,10 @@ return require("packer").startup(function(use)
     use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
     use {"tjdevries/colorbuddy.vim", opt = true}
     require_plugin("colorbuddy.vim")
-    use {"marko-cerovac/material.nvim", opt = true}
-    require_plugin("material.vim")
-    use {"lukas-reineke/indent-blankline.nvim", opt=true, branch = 'lua'}
+    use {"lukas-reineke/indent-blankline.nvim", opt=true, after="material.vim", branch = 'lua'}
     require_plugin("indent-blankline.nvim")
+    use {"marko-cerovac/material.nvim", opt = true}
+    require_plugin("material.nvim")
 
     -- Icons
     use {"kyazdani42/nvim-web-devicons", opt = true}
@@ -118,8 +118,8 @@ return require("packer").startup(function(use)
     -- Formatter
     use {"sbdchd/neoformat", opt = true}
     require_plugin("neoformat")
-    use {"dense-analysis/ale", opt = true}
-    require_plugin("ale")
+    use {"mfussenegger/nvim-lint", opt = true}
+    require_plugin("nvim-lint")
     use {"tpope/vim-sleuth", opt = true}
     require_plugin("vim-sleuth")
     use {"tpope/vim-repeat", opt = true}
