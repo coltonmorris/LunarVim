@@ -5,12 +5,13 @@ CACHE_PATH = vim.fn.stdpath('cache')
 O = {
     auto_close_tree = 0,
     auto_complete = true,
-    colorscheme = 'lunar',
+    -- colorscheme = 'lunar',
+    colorscheme = 'material',
     hidden_files = true,
-    wrap_lines = false,
+    wrap_lines = true,
     number = true,
     relative_number = true,
-    shell = 'bash',
+    shell = 'zsh',
 	timeoutlen = 100,
     nvim_tree_disable_netrw = 0,
     extras = false,
@@ -21,7 +22,7 @@ O = {
         ignore_install = {"haskell"},
         highlight = {enabled = true},
         playground = {enabled = true},
-        rainbow = {enabled = false}
+        rainbow = {enabled = true}
     },
 
     database = {save_location = '~/.config/nvcode_db', auto_execute = 1},
@@ -75,14 +76,16 @@ O = {
 
 	dashboard = {
 		custom_header = {
-'                 _..._                                                                           ',
-'               .\'   (_`.    _                         __     ___           ',
-'              :  .      :  | |   _   _ _ __   __ _ _ _\\ \\   / (_)_ __ ___  ',
-'              :)    ()  :  | |  | | | | \'_ \\ / _` | \'__\\ \\ / /| | \'_ ` _ \\ ',
-'              `.   .   .\'  | |__| |_| | | | | (_| | |   \\ V / | | | | | | |',
-'                `-...-\'    |_____\\__,_|_| |_|\\__,_|_|    \\_/  |_|_| |_| |_|',
+		    [[  _____       _            _             _   _      _       _     _   ]],
+		    [[ / ____|     | |          (_)           | | | |    (_)     | |   | |  ]],
+		    [[| (___   ___ | | __ _ _ __ _ _______  __| | | |     _  __ _| |__ | |_ ]],
+		    [[ \___ \ / _ \| |/ _` | '__| |_  / _ \/ _` | | |    | |/ _` | '_ \| __|]],
+		    [[ ____) | (_) | | (_| | |  | |/ /  __/ (_| | | |____| | (_| | | | | |_ ]],
+		    [[|_____/ \___/|_|\__,_|_|  |_/___\___|\__,_| |______|_|\__, |_| |_|\__|]],
+		    [[                                                       __/ |          ]],
+		    [[                                                      |___/           ]],
 		},
-		footer= {'chrisatmachine.com'}
+		footer= {"'Don\'t bend; don\'t water it down; don\'t try to make it logical; don\'t edit your own soul according to the fashion. Rather, follow your most intense obsessions mercilessly.' - Franz Kafka"},
 	}
 }
 

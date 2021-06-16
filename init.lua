@@ -11,6 +11,8 @@ require('colorscheme') -- This plugin must be required somewhere after nvimtree.
 require('lv-galaxyline')
 require('lv-comment')
 require('lv-gitblame')
+require('lv-editorconfig-vim')
+require('lv-fugitive-gitlab')
 require('lv-compe')
 require('lv-barbar')
 require('lv-dashboard')
@@ -23,6 +25,10 @@ require('lv-rnvimr')
 require('lv-which-key')
 require('lv-lsp-rooter')
 require('lv-zen')
+require('lv-material')
+require('lv-indent-blankline')
+vim.cmd('source ~/.config/nvim/lua/lv-ale/init.vim')
+vim.cmd('source ~/.config/nvim/lua/lv-vim-easyclip/init.vim')
 
 -- extras
 if O.extras then

@@ -7,7 +7,7 @@ require("which-key").setup {
         presets = {
             operators = false, -- adds help for operators like d, y, ...
             motions = false, -- adds help for motions
-            text_objects = false, -- help for text objects triggered after entering an operator
+            text_objects = true, -- help for text objects triggered after entering an operator
             windows = true, -- default bindings on <c-w>
             nav = true, -- misc bindings to work with windows
             z = true, -- bindings for folds, spelling and others prefixed with z
@@ -69,6 +69,10 @@ vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", {noremap = true, s
 -- open projects
 vim.api.nvim_set_keymap('n', '<leader>p', ":lua require'telescope'.extensions.project.project{}<CR>",
                         {noremap = true, silent = true})
+
+-- GBrowse
+vim.api.nvim_set_keymap("v", "<leader>w", ":GBrowse<CR>", {noremap = true, silent = true})
+
 -- TODO create entire treesitter section
 
 local mappings = {
@@ -106,9 +110,12 @@ local mappings = {
         s = {"<cmd>StageHunk<cr>", "Stage Hunk"},
         u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"},
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
-        b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
+        b = {"<cmd>Gitsigns blame_line<cr>", "Blame line popup window"},
+        B = {"<cmd>GitBlameToggle<cr>", "Toggle blame on current line"},
+        w = {"<cmd>GBrowse<cr>", "Open in git browser"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
         C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
+        a = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
     },
     l = {
         name = "+LSP",

@@ -28,6 +28,7 @@ end
 
 vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
+-- opt = true means that the plugin is optional
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
     use "wbthomason/packer.nvim"
@@ -57,12 +58,31 @@ return require("packer").startup(function(use)
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
     use {"windwp/nvim-ts-autotag", opt = true}
     use {'andymass/vim-matchup', opt = true}
+    -- show you which function you're looking at at the top of the screen
+    use {"romgrk/nvim-treesitter-context", opt = true}
+    require_plugin("nvim-treesitter-context")
+    -- make matching parens and stuff different colors
+    use {"p00f/nvim-ts-rainbow", opt = true}
+    require_plugin("nvim-ts-rainbow")
+    -- makes extra pairs that work with %
+    use {"theHamsta/nvim-treesitter-pairs", opt = true}
+    require_plugin("nvim-treesitter-pairs")
+    -- auto highlight the current word
+    use {"RRethy/vim-illuminate", opt = true}
+    require_plugin("vim-illuminate")
 
     -- Explorer
     use {"kyazdani42/nvim-tree.lua", opt = true}
     use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you
     -- TODO remove when open on dir is supported by nvimtree
     use "kevinhwang91/rnvimr"
+
+    -- TODO add:
+    --easyclip,
+    -- the colorscheme,
+    -- set up quickfix list <ctrl q> with telescope
+    -- set up telescope to search project
+    -- and add stuff to which-key
 
     -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
     use {"lewis6991/gitsigns.nvim", opt = true}
@@ -78,6 +98,12 @@ return require("packer").startup(function(use)
 
     -- Color
     use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
+    use {"tjdevries/colorbuddy.vim", opt = true}
+    require_plugin("colorbuddy.vim")
+    use {"marko-cerovac/material.nvim", opt = true}
+    require_plugin("material.vim")
+    use {"lukas-reineke/indent-blankline.nvim", opt=true, branch = 'lua'}
+    require_plugin("indent-blankline.nvim")
 
     -- Icons
     use {"kyazdani42/nvim-web-devicons", opt = true}
@@ -88,6 +114,26 @@ return require("packer").startup(function(use)
 
     -- Zen Mode
     use {"Pocco81/TrueZen.nvim", opt = true}
+
+    -- Formatter
+    use {"sbdchd/neoformat", opt = true}
+    require_plugin("neoformat")
+    use {"dense-analysis/ale", opt = true}
+    require_plugin("ale")
+    use {"tpope/vim-sleuth", opt = true}
+    require_plugin("vim-sleuth")
+    use {"tpope/vim-repeat", opt = true}
+    require_plugin("vim-repeat")
+    use {"editorconfig/editorconfig-vim", opt = true}
+    require_plugin("editorconfig-vim")
+    use {"tpope/vim-fugitive", opt = true} -- needed for :Gbrowse
+    require_plugin("vim-fugitive")
+    use {"shumphrey/fugitive-gitlab.vim", opt = true} -- needed for :Gbrowse. requires setup (echo 'machine api.github.com login <user> password <token>' >> ~/.netrc)
+    require_plugin("fugitive-gitlab.vim")
+    use {"tpope/vim-rhubarb", opt = true} -- needed for :Gbrowse. requires setup (echo 'machine api.github.com login <user> password <token>' >> ~/.netrc)
+    require_plugin("vim-rhubarb")
+    use {"svermeulen/vim-easyclip", opt = true} -- needed for :Gbrowse. requires setup (echo 'machine api.github.com login <user> password <token>' >> ~/.netrc)
+    require_plugin("svermeulen/vim-easyclip")
 
     require_plugin("nvim-lspconfig")
     require_plugin("lspsaga.nvim")
