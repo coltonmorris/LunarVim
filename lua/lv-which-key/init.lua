@@ -140,6 +140,7 @@ local mappings = {
         S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
         n = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic"},
         N = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Diagnostic"},
+        R = {"<cmd>lua require'lint'.try_lint()<cr>", "Load Revive (nvim-lint)"},
     },
 
     s = {
