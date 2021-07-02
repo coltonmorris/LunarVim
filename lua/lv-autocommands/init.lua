@@ -2,6 +2,9 @@ local utils = require('lv-utils')
 
 local auto_formatters = {            }
 
+local wollemi_autoformat = {"BufWritePost *.go silent exec '!wollemi --log fatal gofmt' shellescape(expand('%:h'), 1)"}
+if O.wollemi.autoformat then table.insert(auto_formatters, wollemi_autoformat) end
+
 local python_autoformat = {'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
 if O.python.autoformat then table.insert(auto_formatters, python_autoformat) end
 
@@ -44,13 +47,14 @@ utils.define_augroups({
         {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
     },
-    _go = {
-        -- Go generally requires Tabs instead of spaces.
-        {'FileType', 'go', 'setlocal tabstop=4'},
-        {'FileType', 'go', 'setlocal shiftwidth=4'},
-        {'FileType', 'go', 'setlocal softtabstop=4'},
-        {'FileType', 'go', 'setlocal noexpandtab'},
-    },
+    -- commenting out in favor of vim-sleuth and editorconfig
+    -- _go = {
+    --     -- Go generally requires Tabs instead of spaces.
+    --     {'FileType', 'go', 'setlocal tabstop=4'},
+    --     {'FileType', 'go', 'setlocal shiftwidth=4'},
+    --     {'FileType', 'go', 'setlocal softtabstop=4'},
+    --     {'FileType', 'go', 'setlocal noexpandtab'},
+    -- },
     _dashboard = {
         -- seems to be nobuflisted that makes my stuff disapear will do more testing
         {

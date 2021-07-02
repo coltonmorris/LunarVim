@@ -71,6 +71,7 @@ O = {
 		filetypes = {'rb', 'erb', 'rakefile'}
 	},
     go = {},
+    wollemi = { autoformat = true },
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
 
