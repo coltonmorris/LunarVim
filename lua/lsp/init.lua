@@ -85,9 +85,9 @@ local function documentHighlight(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec(
             [[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
+      hi LspReferenceRead cterm=bold ctermbg=red guibg=#D3D3D3
+      hi LspReferenceText cterm=bold ctermbg=red guibg=#D3D3D3
+      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#D3D3D3
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -103,6 +103,9 @@ local lsp_config = {}
 if O.document_highlight then
     function lsp_config.common_on_attach(client, bufnr)
         documentHighlight(client, bufnr)
+
+        -- vim-illuminate
+        -- require'illuminate'.on_attach(client)
     end
 end
 

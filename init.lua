@@ -28,7 +28,6 @@ require('lv-zen')
 require('lv-material')
 require('lv-indent-blankline')
 require('lv-nvim-lint')
-vim.cmd('source ~/.config/nvim/lua/lv-ale/init.vim')
 vim.cmd('source ~/.config/nvim/lua/lv-vim-easyclip/init.vim')
 
 -- extras
