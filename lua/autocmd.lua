@@ -1,37 +1,55 @@
-local utils = require('lv-utils')
+function define_augroups(definitions) -- {{{1
+    -- Create autocommand groups based on the passed definitions
+    --
+    -- The key will be the name of the group, and each definition
+    -- within the group should have:
+    --    1. Trigger
+    --    2. Pattern
+    --    3. Text
+    -- just like how they would normally be defined from Vim itself
+    for group_name, definition in pairs(definitions) do
+        vim.cmd('augroup ' .. group_name)
+        vim.cmd('autocmd!')
 
-local auto_formatters = {            }
+        for _, def in pairs(definition) do
+            local command = table.concat(vim.tbl_flatten {'autocmd', def}, ' ')
+            vim.cmd(command)
+        end
+
+        vim.cmd('augroup END')
+    end
+end
+
+local auto_formatters = {}
 
 local wollemi_autoformat = {"BufWritePost *.go silent exec '!wollemi --log fatal gofmt' shellescape(expand('%:h'), 1)"}
-if O.wollemi.autoformat then table.insert(auto_formatters, wollemi_autoformat) end
+table.insert(auto_formatters, wollemi_autoformat)
 
 local python_autoformat = {'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.python.autoformat then table.insert(auto_formatters, python_autoformat) end
+table.insert(auto_formatters, python_autoformat)
 
 local javascript_autoformat = {'BufWritePre', '*.js', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
 local javascriptreact_autoformat = {'BufWritePre', '*.jsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
 local typescript_autoformat = {'BufWritePre', '*.ts', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
 local typescriptreact_autoformat = {'BufWritePre', '*.tsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.tsserver.autoformat then
-    table.insert(auto_formatters, javascript_autoformat)
-    table.insert(auto_formatters, javascriptreact_autoformat)
-	table.insert(auto_formatters, typescript_autoformat)
-	table.insert(auto_formatters, typescriptreact_autoformat)
-end
+table.insert(auto_formatters, javascript_autoformat)
+table.insert(auto_formatters, javascriptreact_autoformat)
+table.insert(auto_formatters, typescript_autoformat)
+table.insert(auto_formatters, typescriptreact_autoformat)
 
 local lua_format = {'BufWritePre', '*.lua', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.lua.autoformat then table.insert(auto_formatters, lua_format) end
+table.insert(auto_formatters, lua_format)
 
 local json_format = {'BufWritePre', '*.json', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.json.autoformat then table.insert(auto_formatters, json_format) end
+table.insert(auto_formatters, json_format)
 
 local ruby_format = {'BufWritePre', '*.rb', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
-if O.ruby.autoformat then table.insert(auto_formatters, ruby_format) end
+table.insert(auto_formatters, ruby_format)
 
 local go_format = {'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
-if O.go.autoformat then table.insert(auto_formatters, go_format) end
+table.insert(auto_formatters, go_format)
 
-utils.define_augroups({
+define_augroups({
     _general_settings = {
         {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
         {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
@@ -55,13 +73,6 @@ utils.define_augroups({
     --     {'FileType', 'go', 'setlocal softtabstop=4'},
     --     {'FileType', 'go', 'setlocal noexpandtab'},
     -- },
-    _dashboard = {
-        -- seems to be nobuflisted that makes my stuff disapear will do more testing
-        {
-            'FileType', 'dashboard',
-            'setlocal nocursorline noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= '
-        }, {'FileType', 'dashboard', 'set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2'}
-    },
     _markdown = {{'FileType', 'markdown', 'setlocal wrap'}, {'FileType', 'markdown', 'setlocal spell'}},
     _solidity = {
         {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},

@@ -10,7 +10,7 @@ lspconfig.tailwindls.setup {
         "node", DATA_PATH .. "/lspinstall/tailwindcss/tailwindcss-intellisense/extension/dist/server/tailwindServer.js",
         "--stdio"
     },
-    filetypes = O.tailwindls.filetypes,
+    filetypes = {'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
     init_options = {
         userLanguages = { -- I don't know why but the LSP won't autocomplete the tailwind classes without this
         }

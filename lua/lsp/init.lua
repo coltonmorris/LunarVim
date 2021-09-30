@@ -100,7 +100,9 @@ local function documentHighlight(client, bufnr)
 end
 local lsp_config = {}
 
-if O.document_highlight then
+-- TODO should see how this effects things by setting it to false
+-- if O.document_highlight then
+if true then
     function lsp_config.common_on_attach(client, bufnr)
         documentHighlight(client, bufnr)
     end

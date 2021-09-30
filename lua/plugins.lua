@@ -38,13 +38,14 @@ return require("packer").startup(function(use)
     use {"glepnir/lspsaga.nvim", opt = true}
     use {"kabouzeid/nvim-lspinstall", opt = true}
     use {"folke/trouble.nvim", opt = true}
+    use {"ahmedkhalf/project.nvim", opt = true}
 
     -- Telescope
-    use {"nvim-lua/popup.nvim", opt = true}
+    -- use {"nvim-lua/popup.nvim", opt = true}
     use {"nvim-lua/plenary.nvim", opt = true}
-    use {"nvim-telescope/telescope.nvim", opt = true}
-    use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
-    use {"nvim-telescope/telescope-project.nvim", opt = true}
+    -- use {"nvim-telescope/telescope.nvim", opt = true}
+    -- use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
+    -- use {"nvim-telescope/telescope-project.nvim", opt = true}
 
     -- Debugging
     use {"mfussenegger/nvim-dap", opt = true}
@@ -71,24 +72,16 @@ return require("packer").startup(function(use)
     use {"RRethy/vim-illuminate", opt = true}
     require_plugin("vim-illuminate")
 
-    -- Explorer
-    use {"kyazdani42/nvim-tree.lua", opt = true}
-    use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you
-    -- TODO remove when open on dir is supported by nvimtree
-    use "kevinhwang91/rnvimr"
-
     -- TODO add:
-    --easyclip,
+    -- easyclip,
     -- the colorscheme,
     -- set up quickfix list <ctrl q> with telescope
     -- set up telescope to search project
     -- and add stuff to which-key
 
-    -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
     use {"lewis6991/gitsigns.nvim", opt = true}
     use {'f-person/git-blame.nvim', opt = true}
     use {"folke/which-key.nvim", opt = true}
-    use {"ChristianChiarulli/dashboard-nvim", opt = true}
     use {"windwp/nvim-autopairs", opt = true}
     use {"kevinhwang91/nvim-bqf", opt = true}
 
@@ -97,10 +90,10 @@ return require("packer").startup(function(use)
     use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
 
     -- Color
-    use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
-    use {"tjdevries/colorbuddy.vim", opt = true}
-    require_plugin("colorbuddy.vim")
-    use {"lukas-reineke/indent-blankline.nvim", opt=true, after="material.vim", branch = 'lua'}
+    -- use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
+    -- use {"tjdevries/colorbuddy.vim", opt = true}
+    -- require_plugin("colorbuddy.vim")
+    use {"lukas-reineke/indent-blankline.nvim", opt = true, after = "material.nvim"}
     require_plugin("indent-blankline.nvim")
     use {"marko-cerovac/material.nvim", opt = true}
     require_plugin("material.nvim")
@@ -142,8 +135,8 @@ return require("packer").startup(function(use)
     require_plugin("friendly-snippets")
     require_plugin("popup.nvim")
     require_plugin("plenary.nvim")
-    require_plugin("telescope.nvim")
-    require_plugin('telescope-project.nvim')
+    -- require_plugin("telescope.nvim")
+    -- require_plugin('telescope-project.nvim')
     require_plugin("nvim-dap")
     require_plugin("nvim-compe")
     require_plugin("vim-vsnip")
@@ -154,56 +147,14 @@ return require("packer").startup(function(use)
     require_plugin("gitsigns.nvim")
     require_plugin("git-blame.nvim")
     require_plugin("which-key.nvim")
-    require_plugin("dashboard-nvim")
     require_plugin("nvim-autopairs")
     require_plugin("nvim-comment")
     require_plugin("nvim-bqf")
-    require_plugin("nvcode-color-schemes.vim")
+    -- require_plugin("nvcode-color-schemes.vim")
     require_plugin("nvim-web-devicons")
     require_plugin("galaxyline.nvim")
     require_plugin("barbar.nvim")
-    require_plugin('lsp-rooter.nvim')
+    require_plugin('project.nvim')
     require_plugin("TrueZen.nvim")
     require_plugin("nvim-ts-context-commentstring")
-
-    -- Extras
-    if O.extras then
-        use {'metakirby5/codi.vim', opt = true}
-        require_plugin('codi.vim')
-        use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', opt = true}
-        require_plugin('markdown-preview.nvim')
-        use {'numToStr/FTerm.nvim', opt = true}
-        require_plugin('numToStr/FTerm.nvim')
-        use {'monaqa/dial.nvim', opt = true}
-        require_plugin('dial.nvim')
-        use {'nacro90/numb.nvim', opt = true}
-        require_plugin('numb.nvim')
-        use {'turbio/bracey.vim', run = 'npm install --prefix server', opt = true}
-        require_plugin('bracey.vim')
-        use {'phaazon/hop.nvim', opt = true}
-        require_plugin('hop.nvim')
-        use {'norcalli/nvim-colorizer.lua', opt = true}
-        require_plugin('nvim-colorizer.lua')
-        use {'windwp/nvim-spectre', opt = true}
-        require_plugin('windwp/nvim-spectre')
-        use {'simrat39/symbols-outline.nvim', opt = true}
-        require_plugin('symbols-outline.nvim')
-        use {'nvim-treesitter/playground', opt = true}
-        require_plugin('playground')
-        -- folke/todo-comments.nvim
-        -- gennaro-tedesco/nvim-jqx
-        -- TimUntersberger/neogit
-        -- folke/lsp-colors.nvim
-        -- simrat39/symbols-outline.nvim
-
-        -- Git
-        -- use {'tpope/vim-fugitive', opt = true}
-        -- use {'tpope/vim-rhubarb', opt = true}
-        -- pwntester/octo.nvim
-
-        -- Easily Create Gists
-        -- use {'mattn/vim-gist', opt = true}
-        -- use {'mattn/webapi-vim', opt = true}
-    end
-
 end)
