@@ -3,7 +3,7 @@ vim.cmd('let g:nvcode_termcolors=256')
 vim.cmd('set path+=**') -- when using gf (goto file) it finds files in other dirs
 vim.cmd('set ignorecase     ') -- ignorecase or infercase? The question of the century.
 vim.cmd('set noswapfile') -- dont need a swap because we have an undo dir
-vim.cmd('set scrolloff=3') --keep the cursor from going all the way to the bottom when scrolling
+vim.cmd('set scrolloff=3') -- keep the cursor from going all the way to the bottom when scrolling
 
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
@@ -11,8 +11,8 @@ vim.cmd('set inccommand=split') -- Make substitution work in realtime
 vim.o.hidden = true
 vim.o.title = true
 TERMINAL = vim.fn.expand('$TERMINAL')
-vim.cmd('let &titleold="'..TERMINAL..'"')
-vim.o.titlestring="%<%F%=%l/%L - nvim colton"
+vim.cmd('let &titleold="' .. TERMINAL .. '"')
+vim.o.titlestring = "%<%F%=%l/%L - nvim colton"
 vim.wo.wrap = true
 -- vim.wo.wrap = O.wrap_lines -- Display long lines as just one line
 -- vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
