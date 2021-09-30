@@ -1,3 +1,5 @@
+vim.cmd('let g:nvcode_termcolors=256')
+
 vim.cmd('set path+=**') -- when using gf (goto file) it finds files in other dirs
 vim.cmd('set ignorecase     ') -- ignorecase or infercase? The question of the century.
 vim.cmd('set noswapfile') -- dont need a swap because we have an undo dir
@@ -6,7 +8,7 @@ vim.cmd('set scrolloff=3') --keep the cursor from going all the way to the botto
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 vim.cmd('set inccommand=split') -- Make substitution work in realtime
-vim.o.hidden = O.hidden_files -- Required to keep multiple buffers open multiple buffers
+vim.o.hidden = true
 vim.o.title = true
 TERMINAL = vim.fn.expand('$TERMINAL')
 vim.cmd('let &titleold="'..TERMINAL..'"')
@@ -27,8 +29,8 @@ vim.o.splitright = true -- Vertical splits will automatically be to the right
 vim.o.conceallevel = 0 -- So that I can see `` in markdown files
 vim.cmd('set expandtab') -- Converts tabs to spaces
 vim.bo.smartindent = true -- Makes indenting smart
-vim.wo.number = O.number -- set numbered lines
-vim.wo.relativenumber = O.relative_number -- set relative number
+vim.wo.number = true
+vim.wo.relativenumber = true
 vim.wo.cursorline = true -- Enable highlighting of the current line
 vim.o.showtabline = 2 -- Always show tabs
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore
@@ -36,9 +38,9 @@ vim.o.backup = false -- This is recommended by coc
 vim.o.writebackup = false -- This is recommended by coc
 vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 vim.o.updatetime = 300 -- Faster completion
-vim.o.timeoutlen = O.timeoutlen -- By default timeoutlen is 1000 ms
+vim.o.timeoutlen = 100
 vim.o.clipboard = "unnamed,unnamedplus" -- Copy paste between vim and everything else
-vim.g.nvim_tree_disable_netrw = O.nvim_tree_disable_netrw -- enable netrw for remote gx gf support (must be set before plugin's packadd)
+vim.g.nvim_tree_disable_netrw = 0
 vim.g.loaded_netrwPlugin = 1 -- needed for netrw gx command to open remote links in browser
 vim.cmd('filetype plugin on') -- filetype detection
 -- vim.o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
