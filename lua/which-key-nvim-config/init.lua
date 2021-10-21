@@ -7,10 +7,10 @@ require("which-key").setup {
         presets = {
             operators = false, -- adds help for operators like d, y, ...
             motions = false, -- adds help for motions
-            text_objects = true, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
+            text_objects = false, -- help for text objects triggered after entering an operator
+            windows = false, -- default bindings on <c-w>
             nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
+            z = false, -- bindings for folds, spelling and others prefixed with z
             g = true -- bindings for prefixed with g
         }
     },
@@ -71,7 +71,8 @@ vim.api.nvim_set_keymap('n', '<leader>p', ":lua require'telescope'.extensions.pr
                         {noremap = true, silent = true})
 
 -- GBrowse
-vim.api.nvim_set_keymap("v", "<leader>w", ":GBrowse<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "<leader>w", ":GBrowse<CR>", {noremap = true, silent = false})
+vim.api.nvim_set_keymap("v", "<leader>b", ":GBrowse<CR>", {noremap = true, silent = false})
 
 -- TODO create entire treesitter section
 
@@ -90,7 +91,7 @@ local mappings = {
         d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document"},
         q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
         l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
-        r = {"<cmd>TroubleToggle lsp_references<cr>", "references"},
+        r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
     },
 
     D = {
@@ -113,12 +114,12 @@ local mappings = {
         s = {"<cmd>StageHunk<cr>", "Stage Hunk"},
         u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"},
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
-        b = {"<cmd>Gitsigns blame_line<cr>", "Blame line popup window"},
+        b = {"<cmd>Git blame<cr>", "Open blame window"},
         B = {"<cmd>GitBlameToggle<cr>", "Toggle blame on current line"},
         w = {"<cmd>GBrowse<cr>", "Open in git browser"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
         C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
-        a = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
+        a = {"<cmd>Telescope git_branches<cr>", "Checkout branch"}
     },
 
     l = {
@@ -140,7 +141,7 @@ local mappings = {
         S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
         n = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic"},
         N = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Diagnostic"},
-        R = {"<cmd>lua require'lint'.try_lint()<cr>", "Load Revive (nvim-lint)"},
+        R = {"<cmd>lua require'lint'.try_lint()<cr>", "Load Revive (nvim-lint)"}
     },
 
     s = {
@@ -156,15 +157,7 @@ local mappings = {
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         t = {"<cmd>Telescope live_grep<cr>", "Text"}
     },
-    S = {name = "+Session", s = {"<cmd>SessionSave<cr>", "Save Session"}, l = {"<cmd>SessionLoad<cr>", "Load Session"}},
-
-    -- extras
-    z = {
-        name = "+Zen",
-        s = {"<cmd>TZBottom<cr>", "toggle status line"},
-        t = {"<cmd>TZTop<cr>", "toggle tab bar"},
-        z = {"<cmd>TZAtaraxis<cr>", "toggle zen"},
-    },
+    S = {name = "+Session", s = {"<cmd>SessionSave<cr>", "Save Session"}, l = {"<cmd>SessionLoad<cr>", "Load Session"}}
 }
 
 local wk = require("which-key")

@@ -50,19 +50,22 @@ local go_format = {'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1
 table.insert(auto_formatters, go_format)
 
 define_augroups({
+    _filetypes = {
+        {'BufNewFile,BufRead', '*.plz', 'setlocal filetype=python'},
+        {'BufNewFile,BufRead', '*.build_defs', 'setlocal filetype=python'}
+    },
     _general_settings = {
         {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
         {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-        {'VimLeavePre', '*', 'set title set titleold='},
-        {'FileType', 'qf', 'set nobuflisted'},
+        {'VimLeavePre', '*', 'set title set titleold='}, {'FileType', 'qf', 'set nobuflisted'}
 
         -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
         -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
     },
     _java = {
-        {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
+        {'FileType', 'java', 'luafile ' .. CONFIG_PATH .. '/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
     },
     -- commenting out in favor of vim-sleuth and editorconfig
@@ -85,7 +88,7 @@ define_augroups({
     _buffer_bindings = {
         {'FileType', 'dashboard', 'nnoremap <silent> <buffer> q :q<CR>'},
         {'FileType', 'lspinfo', 'nnoremap <silent> <buffer> q :q<CR>'},
-        {'FileType', 'floaterm', 'nnoremap <silent> <buffer> q :q<CR>'},
+        {'FileType', 'floaterm', 'nnoremap <silent> <buffer> q :q<CR>'}
     },
     _auto_formatters = auto_formatters
 })

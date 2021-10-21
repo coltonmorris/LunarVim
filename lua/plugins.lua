@@ -8,12 +8,15 @@ if fn.empty(fn.glob(install_path)) > 0 then
     execute "packadd packer.nvim"
 end
 
+-- Auto compile when there are changes in plugins.lua
+-- vim.cmd('autocmd BufWritePost plugins.lua PackerCompile')
+
 --- Check if a file or directory exists in this path
 local function require_plugin(plugin)
     local plugin_prefix = fn.stdpath("data") .. "/site/pack/packer/opt/"
 
     local plugin_path = plugin_prefix .. plugin .. "/"
-    --	print('test '..plugin_path)
+    -- print('test '..plugin_path)
     local ok, err, code = os.rename(plugin_path, plugin_path)
     if not ok then
         if code == 13 then
@@ -27,7 +30,7 @@ local function require_plugin(plugin)
 end
 
 local function require_plugin_with_config(plugin)
-    -- dots in the file/dirname make things crash
+    -- dots in the file/dirname make things crash, replace with dashes
     local replace_dots = plugin:gsub([[%.]], [[%-]]) .. "-config"
 
     require_plugin(plugin)
@@ -45,27 +48,30 @@ end
 
 local function custom_use_with_config_dir(use, plugin)
     use {plugin, opt = true}
-    -- remove the author account name from plugin
+    -- remove the author account name from plugin (everything after slash)
     local plugin_name = string.match(plugin, "/(.*)")
 
     require_plugin_with_config(plugin_name)
 end
 
-vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
-
 -- opt = true means that the plugin is optional
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
-    custom_use(use, "wbthomason/packer.nvim")
-    -- use "wbthomason/packer.nvim"
+    use "wbthomason/packer.nvim"
+    require_plugin('packer.nvim')
 
-    -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
     use {"neovim/nvim-lspconfig", opt = true}
     require_plugin("nvim-lspconfig")
-    custom_use(use, "glepnir/lspsaga.nvim")
-    custom_use(use, "kabouzeid/nvim-lspinstall")
-    custom_use(use, "folke/trouble.nvim")
-    custom_use_with_config_dir(use, "ahmedkhalf/project.nvim")
+    use {"glepnir/lspsaga.nvim", opt = true}
+    require_plugin("lspsaga.nvim")
+    use {"kabouzeid/nvim-lspinstall", opt = true}
+    require_plugin("nvim-lspinstall")
+    use {"folke/trouble.nvim", opt = true}
+    require_plugin("trouble.nvim")
+    -- idk if i like the workflow of this plugin... 
+    -- use {"ahmedkhalf/project.nvim", opt = true}
+    -- require_plugin("project.nvim")
+    -- require("project-nvim-config")
 
     -- Telescope
     -- use {"nvim-lua/popup.nvim", opt = true}
@@ -76,25 +82,39 @@ return require("packer").startup(function(use)
     -- use {"nvim-telescope/telescope-project.nvim", opt = true}
 
     -- Debugging
-    custom_use(use, "mfussenegger/nvim-dap")
+    use {"mfussenegger/nvim-dap", opt = true}
+    require_plugin("nvim-dap")
 
     -- Autocomplete
-    custom_use_with_config_dir(use, "hrsh7th/nvim-compe")
-    custom_use(use, "hrsh7th/vim-vsnip")
-    custom_use(use, "rafamadriz/friendly-snippets")
+    use {"hrsh7th/nvim-compe", opt = true}
+    require_plugin("nvim-compe")
+    require("nvim-compe-config")
+    use {"hrsh7th/vim-vsnip", opt = true}
+    require_plugin("vim-vsnip")
+    use {"rafamadriz/friendly-snippets", opt = true}
+    require_plugin("friendly-snippets")
 
     -- Treesitter
-    custom_use_with_config_dir(use, "nvim-treesitter/nvim-treesitter")
-    custom_use(use, "windwp/nvim-ts-autotag")
-    custom_use_with_config_dir(use, 'andymass/vim-matchup')
+    use {"nvim-treesitter/nvim-treesitter", opt = true}
+    require_plugin("nvim-treesitter")
+    require("nvim-treesitter-config")
+    use {"windwp/nvim-ts-autotag", opt = true}
+    require_plugin("nvim-ts-autotag")
+    use {'andymass/vim-matchup', opt = true}
+    require_plugin("vim-matchup")
+    require("vim-matchup-config")
     -- show you which function you're looking at at the top of the screen
-    custom_use(use, "romgrk/nvim-treesitter-context")
+    use {"romgrk/nvim-treesitter-context", opt = true}
+    require_plugin("nvim-treesitter-context")
     -- make matching parens and stuff different colors
-    custom_use(use, "p00f/nvim-ts-rainbow")
+    use {"p00f/nvim-ts-rainbow", opt = true}
+    require_plugin("nvim-ts-rainbow")
     -- makes extra pairs that work with %
-    custom_use(use, "theHamsta/nvim-treesitter-pairs")
+    use {"theHamsta/nvim-treesitter-pairs", opt = true}
+    require_plugin("nvim-treesitter-pairs")
     -- auto highlight the current word
-    custom_use(use, "RRethy/vim-illuminate")
+    use {"RRethy/vim-illuminate", opt = true}
+    require_plugin("vim-illuminate")
 
     -- TODO add:
     -- easyclip,
@@ -103,15 +123,26 @@ return require("packer").startup(function(use)
     -- set up telescope to search project
     -- and add stuff to which-key
 
-    custom_use_with_config_dir(use, "lewis6991/gitsigns.nvim")
-    custom_use_with_config_dir(use, 'f-person/git-blame.nvim')
-    custom_use_with_config_dir(use, "folke/which-key.nvim")
-    custom_use_with_config_dir(use, "windwp/nvim-autopairs")
-    custom_use(use, "kevinhwang91/nvim-bqf")
+    use {"lewis6991/gitsigns.nvim", opt = true}
+    require_plugin("gitsigns.nvim")
+    require("gitsigns-nvim-config")
+    use {"f-person/git-blame.nvim", opt = true}
+    require_plugin("git-blame.nvim")
+    require("git-blame-nvim-config")
+    use {"folke/which-key.nvim", opt = true}
+    require_plugin("which-key.nvim")
+    require("which-key-nvim-config")
+    use {"windwp/nvim-autopairs", opt = true}
+    require_plugin("nvim-autopairs")
+    require("nvim-autopairs-config")
+    use {"kevinhwang91/nvim-bqf", opt = true}
+    require_plugin("nvim-bqf")
 
     -- Comments
-    custom_use_with_config_dir(use, "terrortylor/nvim-comment")
-    custom_use(use, 'JoosepAlviste/nvim-ts-context-commentstring')
+    use {"tpope/vim-commentary", opt = true}
+    require_plugin("vim-commentary")
+    use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
+    require_plugin('JoosepAlviste/nvim-ts-context-commentstring')
 
     -- Color
     -- use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
@@ -121,7 +152,9 @@ return require("packer").startup(function(use)
     use {"lukas-reineke/indent-blankline.nvim", opt = true, after = "material.nvim"}
     require_plugin_with_config("indent-blankline.nvim")
 
-    custom_use_with_config_dir(use, "marko-cerovac/material.nvim")
+    use {"marko-cerovac/material.nvim", opt = true}
+    require_plugin("material.nvim")
+    require("material-nvim-config")
 
     -- Icons
     -- TODO the custome_use doesnt work here?
@@ -129,22 +162,37 @@ return require("packer").startup(function(use)
     require_plugin("nvim-web-devicons")
 
     -- Status Line and Bufferline
-    custom_use_with_config_dir(use, "glepnir/galaxyline.nvim")
-    custom_use_with_config_dir(use, "romgrk/barbar.nvim")
-
-    -- Zen Mode
-    custom_use_with_config_dir(use, "Pocco81/TrueZen.nvim")
+    use {"glepnir/galaxyline.nvim", opt = true}
+    require_plugin("galaxyline.nvim")
+    require("galaxyline-nvim-config")
+    use {"romgrk/barbar.nvim", opt = true}
+    require_plugin("barbar.nvim")
+    require("barbar-nvim-config")
 
     -- Formatter
-    custom_use(use, "sbdchd/neoformat")
-    custom_use_with_config_dir(use, "mfussenegger/nvim-lint")
-    custom_use(use, "tpope/vim-sleuth")
-    custom_use(use, "tpope/vim-repeat")
-    custom_use_with_config_dir(use, "editorconfig/editorconfig-vim")
-    custom_use(use, "tpope/vim-fugitive")
-    custom_use_with_config_dir(use, "shumphrey/fugitive-gitlab.vim")
-    custom_use(use, "tpope/vim-rhubarb")
-    custom_use(use, "svermeulen/vim-easyclip")
+    use {"sbdchd/neoformat", opt = true}
+    require_plugin("neoformat")
+    use {"tpope/vim-sleuth", opt = true}
+    require_plugin("vim-sleuth")
+    use {"tpope/vim-repeat", opt = true}
+    require_plugin("vim-repeat")
+    use {"editorconfig/editorconfig-vim", opt = true}
+    require_plugin("editorconfig-vim")
+    require("editorconfig-vim-config")
+    use {"tpope/vim-fugitive", opt = true}
+    require_plugin("vim-fugitive")
+    use {"shumphrey/fugitive-gitlab.vim", opt = true}
+    require_plugin("fugitive-gitlab.vim")
+    require("fugitive-gitlab-vim-config")
+    use {"tpope/vim-rhubarb", opt = true}
+    require_plugin("vim-rhubarb")
+    use {"mfussenegger/nvim-lint", opt = true}
+    require_plugin("nvim-lint")
+    require("nvim-lint-config")
+
+    -- use {"svermeulen/vim-easyclip", opt = true}
+    -- require_plugin("vim-easyclip")
+    -- require("vim-easyclip-config")
 
     -- require_plugin("popup.nvim")
     -- require_plugin("telescope.nvim")
