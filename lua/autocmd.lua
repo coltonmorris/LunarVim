@@ -68,14 +68,6 @@ define_augroups({
         {'FileType', 'java', 'luafile ' .. CONFIG_PATH .. '/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
     },
-    -- commenting out in favor of vim-sleuth and editorconfig
-    -- _go = {
-    --     -- Go generally requires Tabs instead of spaces.
-    --     {'FileType', 'go', 'setlocal tabstop=4'},
-    --     {'FileType', 'go', 'setlocal shiftwidth=4'},
-    --     {'FileType', 'go', 'setlocal softtabstop=4'},
-    --     {'FileType', 'go', 'setlocal noexpandtab'},
-    -- },
     _markdown = {{'FileType', 'markdown', 'setlocal wrap'}, {'FileType', 'markdown', 'setlocal spell'}},
     _solidity = {
         {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},

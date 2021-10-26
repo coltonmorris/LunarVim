@@ -56,8 +56,11 @@ end
 
 -- opt = true means that the plugin is optional
 return require("packer").startup(function(use)
+    use {"nvim-lua/plenary.nvim"}
+    require_plugin("plenary.nvim")
+
     -- Packer can manage itself as an optional plugin
-    use "wbthomason/packer.nvim"
+    use {"wbthomason/packer.nvim", event = "VimEnter"}
     require_plugin('packer.nvim')
 
     use {"neovim/nvim-lspconfig", opt = true}
@@ -68,15 +71,13 @@ return require("packer").startup(function(use)
     require_plugin("nvim-lspinstall")
     use {"folke/trouble.nvim", opt = true}
     require_plugin("trouble.nvim")
-    -- idk if i like the workflow of this plugin... 
+    -- idk if i like the workflow of this plugin...
     -- use {"ahmedkhalf/project.nvim", opt = true}
     -- require_plugin("project.nvim")
     -- require("project-nvim-config")
 
     -- Telescope
     -- use {"nvim-lua/popup.nvim", opt = true}
-    use {"nvim-lua/plenary.nvim", opt = true}
-    require_plugin("plenary.nvim")
     -- use {"nvim-telescope/telescope.nvim", opt = true}
     -- use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
     -- use {"nvim-telescope/telescope-project.nvim", opt = true}
@@ -86,9 +87,35 @@ return require("packer").startup(function(use)
     require_plugin("nvim-dap")
 
     -- Autocomplete
-    use {"hrsh7th/nvim-compe", opt = true}
-    require_plugin("nvim-compe")
-    require("nvim-compe-config")
+    -- 
+    use {"onsails/lspkind-nvim", opt = true} -- vscode-like pictograms for cmp
+    require_plugin("lspkind-nvim")
+    -- TODO use nvim-cmp by the same author
+    use {"hrsh7th/nvim-cmp", opt = true}
+    require_plugin("nvim-cmp")
+    require("nvim-cmp-config")
+    -- must declare these sources in the cmp-config dir
+    -- TODO get a calculator cmp
+    -- TODO get a spelling cmp
+    use {"hrsh7th/cmp-buffer", opt = true}
+    require_plugin("cmp-buffer")
+    use {"hrsh7th/cmp-path", opt = true}
+    require_plugin("cmp-path")
+    use {"hrsh7th/cmp-nvim-lua", opt = true}
+    require_plugin("cmp-nvim-lua")
+    use {"hrsh7th/cmp-nvim-lsp", opt = true}
+    require_plugin("cmp-nvim-lsp")
+    use {"David-Kunz/cmp-npm", opt = true, requires = {'nvim-lua/plenary.nvim'}}
+    require_plugin("cmp-npm")
+    -- TODO maybe have this ripgrep the whole project rather than just cwd
+    use {"lukas-reineke/cmp-rg", opt = true}
+    require_plugin("cmp-rg")
+
+    -- TODO use snippet pluign: https://github.com/L3MON4D3/LuaSnip
+    -- TODO and then use https://github.com/saadparwaiz1/cmp_luasnip to have cmp work with snippets
+    -- or use ultisnips, or snippy, or vsnip. tjdevries uses luasnip. ultisnips seems to be more supported in vim
+    -- TODO when a snippet completes then we should have a keybinding for jumping between the values for filling it out
+
     use {"hrsh7th/vim-vsnip", opt = true}
     require_plugin("vim-vsnip")
     use {"rafamadriz/friendly-snippets", opt = true}
@@ -186,6 +213,15 @@ return require("packer").startup(function(use)
     require("fugitive-gitlab-vim-config")
     use {"tpope/vim-rhubarb", opt = true}
     require_plugin("vim-rhubarb")
+    -- TODO vim-go is messing with nvim-lint i think. taking forever to save
+    -- use {
+    --     'fatih/vim-go',
+    --     config = function()
+    --         vim.g.syntastic_go_checkers = {}
+    --         vim.g.go_fmt_command = ""
+    --     end
+    -- }
+    -- use {"~/go/pkg/mod/github.com/zchee/nvim-go@v0.3.0/plugin/nvim-go.vim", opt = true, run = "make"}
     use {"mfussenegger/nvim-lint", opt = true}
     require_plugin("nvim-lint")
     require("nvim-lint-config")
