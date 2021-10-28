@@ -226,6 +226,9 @@ return require("packer").startup(function(use)
     require_plugin("nvim-lint")
     require("nvim-lint-config")
 
+    use {"github/copilot.vim", opt = true}
+    require_plugin("copilot.vim")
+
     -- use {"svermeulen/vim-easyclip", opt = true}
     -- require_plugin("vim-easyclip")
     -- require("vim-easyclip-config")

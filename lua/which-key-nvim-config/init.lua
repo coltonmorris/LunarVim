@@ -82,7 +82,7 @@ local mappings = {
     ["e"] = "Explorer",
     ["f"] = "Find File",
     ["h"] = "No Highlight",
-    ["p"] = "Projects",
+    ["P"] = "Projects",
 
     d = {
         name = "+Diagnostics",
@@ -157,7 +157,8 @@ local mappings = {
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         t = {"<cmd>Telescope live_grep<cr>", "Text"}
     },
-    S = {name = "+Session", s = {"<cmd>SessionSave<cr>", "Save Session"}, l = {"<cmd>SessionLoad<cr>", "Load Session"}}
+    S = {name = "+Session", s = {"<cmd>SessionSave<cr>", "Save Session"}, l = {"<cmd>SessionLoad<cr>", "Load Session"}},
+    p = {name = "+Plz", b = {"<cmd>!plz build<cr>", "plz build"}, t = {"<cmd>!plz test<cr>", "plz test"}}
 }
 
 local wk = require("which-key")
