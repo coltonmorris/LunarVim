@@ -1,5 +1,6 @@
 vim.cmd('let g:nvcode_termcolors=256')
 
+-- TODO dont use the cmd api, its slower
 vim.cmd('set undodir=~/.config/nvim/undo-dir')
 vim.cmd('set undofile')
 
@@ -42,6 +43,11 @@ vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shif
 vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = 100
 vim.o.clipboard = "unnamed,unnamedplus" -- yanking adds to + and * registers. system clipboard is the * register btw.
-vim.g.nvim_tree_disable_netrw = 0
-vim.g.loaded_netrwPlugin = 1 -- needed for netrw gx command to open remote links in browser
+-- vim.g.nvim_tree_disable_netrw = 0
+-- vim.g.loaded_netrwPlugin = 1 -- needed for netrw gx command to open remote links in browser
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 4 -- 4 open files in previon window, use 2 for vertical
+vim.g.netrw_winsize = 20
+vim.g.netrw_altv = 1 -- have window open on left
 vim.o.guifont = "FiraCode Nerd Font:h17"

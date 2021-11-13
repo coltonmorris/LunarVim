@@ -22,7 +22,11 @@ end
 
 local auto_formatters = {}
 
-local wollemi_autoformat = {"BufWritePost *.go silent exec '!wollemi --log fatal gofmt' shellescape(expand('%:h'), 1)"}
+-- TODO why is wollemi not working?
+-- local wollemi_autoformat = {
+--     "BufWritePost *.go silent exec '!wollemi --log fatal gofmt' shellescape(expand('%:h'), 1)",
+--     "BufWritePost *.plz silent exec '!wollemi --log fatal fmt' shellescape(expand('%:h'), 1)"
+-- }
 table.insert(auto_formatters, wollemi_autoformat)
 
 local python_autoformat = {'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
@@ -37,6 +41,7 @@ table.insert(auto_formatters, javascriptreact_autoformat)
 table.insert(auto_formatters, typescript_autoformat)
 table.insert(auto_formatters, typescriptreact_autoformat)
 
+-- TODO look here if lua formatting is annoying
 local lua_format = {'BufWritePre', '*.lua', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
 table.insert(auto_formatters, lua_format)
 
@@ -50,16 +55,13 @@ local go_format = {'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1
 table.insert(auto_formatters, go_format)
 
 define_augroups({
-    _filetypes = {
-        {'BufNewFile,BufRead', '*.plz', 'setlocal filetype=python'},
-        {'BufNewFile,BufRead', '*.build_defs', 'setlocal filetype=python'}
-    },
     _general_settings = {
         {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
         {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-        {'VimLeavePre', '*', 'set title set titleold='}, {'FileType', 'qf', 'set nobuflisted'}
+        {'VimLeavePre', '*', 'set title set titleold='}, {'FileType', 'qf', 'set nobuflisted'},
+        {'BufEnter', '*', [[exe 'noremap <F5> :!open -a "Google Chrome" %:p:.<CR>']]}
 
         -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
         -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
